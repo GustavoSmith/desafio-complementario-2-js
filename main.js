@@ -5,6 +5,10 @@ class Vehicle { // Clase del vehículo
     this.name = name;
     this.id = id;
     this.basicPrice = basicPrice;
+    this.pushToCoveredVehicles();
+  }
+
+  pushToCoveredVehicles() {
     coveredVehicles.push(this);
   }
 }
@@ -29,7 +33,7 @@ const userName = prompt('Por favor, ingrese su nombre: ');
 alert(`Hola ${userName || 'Invitado'}, bienvenido al cotizador de bicicletas y monopatines de Seguros Smith.`);
 const userVehicle = Number(prompt('Ingrese el ID del vehículo. 1 = Bicicleta, 2 = Monopatín. '));
 
-if (coveredVehicles.map(vehicle => vehicle.id).includes(userVehicle)) {
+if (coveredVehicles.some(vehicle => vehicle.id === userVehicle)) {
   const vehicleModel = Number(prompt('Por favor, ingrese el año en el que usted compró el vehículo: '));
 
   if (2000 <= vehicleModel && vehicleModel <= 2022) {

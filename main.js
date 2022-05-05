@@ -17,11 +17,10 @@ class Insurance { // Clase que contiene los datos del seguro
     this.vehicle = vehicle;
     this.model = model;
     this.basicPrice = vehicle.basicPrice;
-    this.formulaPrice = 50 * (2015 - this.model);
-    this.appliesFormula = this.model < 2015;
+    this.formulaPrice = 50 * Math.max(0, 2015 - this.model); // Si el modelo es menor a 2015, se aplica un recargo de $50 por cada año
   }
 
-  calculatePrice = () => this.basicPrice + (this.appliesFormula ? this.formulaPrice : 0);
+  calculatePrice = () => this.basicPrice + this.formulaPrice;
 }
 
 // Vehículos cubiertos

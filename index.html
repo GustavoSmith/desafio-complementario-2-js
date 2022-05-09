@@ -29,10 +29,10 @@
           <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <div class="navbar-nav gap-3 align-items-center">
               <a href="#" class="nav-link text-white headerElem"><i class="bi bi-house-door-fill fs-4"></i>Inicio</a>
-              <a href="#" class="nav-link text-white headerElem"><i class="bi bi-calculator-fill fs-4"></i>Cotizador</a>
-              <a href="#" class="nav-link text-white headerElem"><i class="bi bi-currency-dollar fs-4"></i>Precios</a>
-              <a href="#" class="nav-link text-white headerElem"><i class="bi bi-question-circle fs-4"></i>FAQ</a>
-              <a href="#" class="nav-link text-white headerElem"><i class="bi bi-people-fill fs-4"></i>Contacto</a>
+              <a href="#cotizador" class="nav-link text-white headerElem"><i class="bi bi-calculator-fill fs-4"></i>Cotizador</a>
+              <a href="#precios" class="nav-link text-white headerElem"><i class="bi bi-currency-dollar fs-4"></i>Precios</a>
+              <a href="#faq" class="nav-link text-white headerElem"><i class="bi bi-question-circle fs-4"></i>FAQ</a>
+              <a href="#contacto" class="nav-link text-white headerElem"><i class="bi bi-people-fill fs-4"></i>Contacto</a>
             </div>
           </div>
         </nav>
@@ -40,14 +40,14 @@
     </div>
   </header>
   <main>
-    <section class="container my-5">
+    <section class="container my-5" id="inicio">
       <div class="row">
         <div class="text-center col-sm-12 col-md-12 col-lg-6">
           <h1 class="display-5 fw-bold lh-1 mb-3">Seguros para Bicicletas y Monopatines</h1>
           <h2>Contratá el seguro ideal para vos</h2>
           <p class="lead">Te asesoramos y armamos tu seguro a medida, según tu presupuesto y necesidades.</p>
           <div class="">
-            <a href="" title="Cotizar Seguro" class="" id="">
+            <a href="#cotizador" title="Cotizar Seguro" class="" id="">
               <button class="btn btn-primary btn-lg">Cotizar Seguro</button>
             </a>
           </div>
@@ -65,14 +65,14 @@
                 <img src="media/img/bike-family-1.jpg" class="d-block w-100" alt="Imagen de stock">
               </div>
               <div class="carousel-item">
-                <img src="media/img/bike-family-2.jpg" class="d-block w-100" alt="Imagen de stock">
-              </div>
-              <div class="carousel-item">
                 <img src="media/img/scooter-family.jpg" class="d-block w-100" alt="Imagen de stock">
               </div>
               <div class="carousel-item">
                 <img src="media/img/scooter.jpg" class="d-block w-100" alt="Imagen de stock">
               </div>
+              <!-- <div class="carousel-item">
+                <img src="media/img/bike-family-2.jpg" class="d-block w-100" alt="Imagen de stock">
+              </div> -->
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#clientCarousel" data-bs-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -86,6 +86,42 @@
         </div>
       </div>
     </section>
+    <section class="container" id="cotizador">
+      <div class="row justify-content-center mb-2">
+        <div class="text-center col-sm-12 col-md-12 col-lg-6">
+          <h2>Ingrese sus datos</h2>
+          <form id="cotizadorForm" class="row">
+            <div class="mb-3 col-12">
+              <label for="cotizacionName" class="form-label visually-hidden">Nombre</label>
+              <input class="form-control" id="cotizacionName" type="text" placeholder="Nombre" required>
+            </div>
+            <div class="mb-3 col-12">
+              <label for="cotizacionMail" class="form-label visually-hidden">Correo</label>
+              <input class="form-control" id="cotizacionMail" type="email" placeholder="Correo electrónico" required>
+            </div>
+            <div class="mb-3 col-6">
+              <label for="cotizacionVehicle" class="form-label visually-hidden">Vehiculo</label>
+              <select class="form-select" id="cotizacionVehicle" aria-label="Vehículo" required>
+                <option selected disabled value="">Seleccione un vehículo</option>
+                <option value="bicicleta">Bicicleta</option>
+                <option value="monopatín">Monopatín</option>
+              </select>
+            </div>
+            <div class="mb-3 col-6">
+              <label for="cotizacionVehicleYear" class="form-label visually-hidden">Año del vehículo</label>
+              <input class="form-control" id="cotizacionVehicleYear" type="text" placeholder="Año del vehículo" required>
+            </div>
+            <button class="btn btn-primary btn-lg" id="cotizadorButton" type="submit">Cotizar</button>
+          </form>
+          <div class="text-center" id="cotizacion"></div>
+        </div>
+      </div>
+    </section>
+    <!--
+      <section id="precios">Precios</section>
+      <section id="faq">FAQ</section>
+      <section id="contacto">Contacto</section>
+    -->
   </main>
   <footer>
     <p class="copyright">Smith © 2022 Todos los derechos reservados.</p>

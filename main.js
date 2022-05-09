@@ -1,9 +1,9 @@
 const coveredVehicles = [];
 
+// Clases
 class Vehicle { // Clase del vehículo
-  constructor(name, id, basicPrice) {
+  constructor(name, basicPrice) {
     this.name = name;
-    this.id = id;
     this.basicPrice = basicPrice;
     this.pushToCoveredVehicles();
   }
@@ -23,26 +23,56 @@ class Insurance { // Clase que contiene los datos del seguro
   calculatePrice = () => this.basicPrice + this.formulaPrice;
 }
 
+// Funciones
+
+const getPrice = (clientData) => {
+  const vehicle = coveredVehicles.find((vehicle) => vehicle.name === clientData.cotizacionVehicle);
+  const year = clientData.cotizacionVehicleYear;
+  const insurance = new Insurance(vehicle, year);
+  console.log(insurance);
+  const price = insurance.calculatePrice();
+  console.log(price);
+  return price;
+};
+
+const getClientData = (inputs) => {
+
+  const clientData = {};
+
+  inputs.forEach((input) => {
+    clientData[input.id] = input.value; //Armo el objeto client data
+  });
+
+  const dataType = {
+    cotizacionName: 'Nombre:',
+    cotizacionMail: 'Correo:',
+    cotizacionVehicle: 'Vehículo:',
+    cotizacionVehicleYear: 'Año:',
+    cotizadorButton: '',
+  };
+  let msg = '<p>';
+
+  Object.keys(clientData).forEach((input) => {
+    msg += `<br>${dataType[input]} ${clientData[input]}`;
+  });
+
+  const price = getPrice(clientData);
+
+  msg += `El precio de su seguro es de: $${price} por mes.</p>`;
+
+  return msg;
+};
+
 // Vehículos cubiertos
-const bike = new Vehicle('Bicicleta', 1, 500);
-const scooter = new Vehicle('Monopatín', 2, 1000);
+const bike = new Vehicle('bicicleta', 500);
+const scooter = new Vehicle('monopatín', 1000);
 
-const userName = prompt('Por favor, ingrese su nombre: ');
+const cotizadorForm = document.getElementById('cotizadorForm');
 
-alert(`Hola ${userName || 'Invitado'}, bienvenido al cotizador de bicicletas y monopatines de Seguros Smith.`);
-const userVehicle = Number(prompt('Ingrese el ID del vehículo. 1 = Bicicleta, 2 = Monopatín. '));
-
-if (coveredVehicles.some(vehicle => vehicle.id === userVehicle)) {
-  const vehicleModel = Number(prompt('Por favor, ingrese el año en el que usted compró el vehículo: '));
-
-  if (2000 <= vehicleModel && vehicleModel <= 2022) {
-    const clientInsurance = new Insurance(coveredVehicles.find(vehicle => vehicle.id === userVehicle), vehicleModel);
-    alert(`El precio total del seguro es de ${clientInsurance.calculatePrice()} pesos argentinos por mes.`);
-  } else {
-
-    alert('No aseguramos un vehículo con ese año. Por favor, ingrese un año válido.');
-  }
-} else {
-
-  alert('Elija un vehículo válido.');
-}
+cotizadorForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const inputArray = [...cotizadorForm.elements]; // Obtengo todos los input del formulario
+  const msg = getClientData(inputArray);
+  const cotizacion = document.getElementById('cotizacion');
+  cotizacion.innerHTML = msg;
+});

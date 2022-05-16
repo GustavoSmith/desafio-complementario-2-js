@@ -1,7 +1,5 @@
 const coveredVehicles = [];
-
-// Clases
-class Vehicle { // Clase del vehículo
+class Vehicle {
   constructor(name, basicPrice) {
     this.name = name;
     this.basicPrice = basicPrice;
@@ -12,7 +10,7 @@ class Vehicle { // Clase del vehículo
     coveredVehicles.push(this);
   }
 }
-class Insurance { // Clase que contiene los datos del seguro
+class Insurance {
   constructor(vehicle, model = 2000) {
     this.vehicle = vehicle;
     this.model = model;
@@ -23,15 +21,11 @@ class Insurance { // Clase que contiene los datos del seguro
   calculatePrice = () => this.basicPrice + this.formulaPrice;
 }
 
-// Funciones
-
 const getPrice = (clientData) => {
   const vehicle = coveredVehicles.find((vehicle) => vehicle.name === clientData.cotizacionVehicle);
   const year = clientData.cotizacionVehicleYear;
   const insurance = new Insurance(vehicle, year);
-  console.log(insurance);
   const price = insurance.calculatePrice();
-  console.log(price);
   return price;
 };
 
@@ -40,7 +34,7 @@ const getClientData = (inputs) => {
   const clientData = {};
 
   inputs.forEach((input) => {
-    clientData[input.id] = input.value; //Armo el objeto client data
+    clientData[input.id] = input.value;
   });
 
   const dataType = {
@@ -60,10 +54,12 @@ const getClientData = (inputs) => {
 
   msg += `El precio de su seguro es de: $${price} por mes.</p>`;
 
+  localStorage.setItem('precioCotizacion', price);
+  localStorage.setItem('informacionCliente', JSON.stringify(clientData));
+
   return msg;
 };
 
-// Vehículos cubiertos
 const bike = new Vehicle('bicicleta', 500);
 const scooter = new Vehicle('monopatín', 1000);
 
@@ -71,7 +67,7 @@ const cotizadorForm = document.getElementById('cotizadorForm');
 
 cotizadorForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  const inputArray = [...cotizadorForm.elements]; // Obtengo todos los input del formulario
+  const inputArray = [...cotizadorForm.elements];
   const msg = getClientData(inputArray);
   const cotizacion = document.getElementById('cotizacion');
   cotizacion.innerHTML = msg;

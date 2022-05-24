@@ -62,13 +62,70 @@ const getClientData = (inputs) => {
 
 const bike = new Vehicle('bicicleta', 500);
 const scooter = new Vehicle('monopatín', 1000);
+let formValidated = false;
 
 const cotizadorForm = document.getElementById('cotizadorForm');
 
+const validation = new window.JustValidate(cotizadorForm);
+validation.addField(
+  '#cotizacionName', [
+  {
+    rule: 'required',
+    errorMessage: 'Ingrese un nombre.',
+  },
+  {
+    rule: 'minLength',
+    value: 2,
+    errorMessage: 'Su nombre debe tener al menos 2 caracteres.',
+  },
+  {
+    rule: 'maxLength',
+    value: 30,
+    errorMessage: 'Ingrese un nombre más corto.',
+  },
+  {
+    rule: 'customRegexp',
+    value: /^[a-z ,.'-]+$/i,
+    errorMessage: 'Ingrese un nombre válido.',
+  },
+]).addField(
+  '#cotizacionMail', [
+  {
+    rule: 'required',
+    errorMessage: 'Ingrese un correo electrónico.',
+  },
+  {
+    rule: 'email',
+    errorMessage: 'Ingrese un correo válido.',
+  },
+]).addField(
+  '#cotizacionVehicleYear', [
+  {
+    rule: 'required',
+    errorMessage: 'Ingrese un año.',
+  },
+  {
+    rule: 'minNumber',
+    value: 1990,
+    errorMessage: 'Solo se aceptan vehículos fabricados a partir de 1990.',
+  },
+  {
+    rule: 'maxNumber',
+    value: 2022,
+    errorMessage: 'Solo se aceptan vehículos fabricados hasta 2022.',
+  },
+]).onSuccess((e) => {
+  e.preventDefault();
+  formValidated = true;
+});
+
 cotizadorForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  const inputArray = [...cotizadorForm.elements];
-  const msg = getClientData(inputArray);
-  const cotizacion = document.getElementById('cotizacion');
-  cotizacion.innerHTML = msg;
+  if (formValidated) {
+    const inputArray = [...cotizadorForm.elements];
+    const msg = getClientData(inputArray);
+    const cotizacion = document.getElementById('cotizacion');
+    cotizacion.innerHTML = msg;
+  }
+  formValidated = false;
 });

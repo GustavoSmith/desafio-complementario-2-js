@@ -90,18 +90,18 @@
       <div class="row justify-content-center mb-2">
         <div class="text-center col-sm-12 col-md-12 col-lg-6">
           <h2>Ingrese sus datos</h2>
-          <form id="cotizadorForm" class="row">
+          <form id="cotizadorForm" class="row" autocomplete="off">
             <div class="mb-3 col-12">
               <label for="cotizacionName" class="form-label visually-hidden">Nombre</label>
-              <input class="form-control" id="cotizacionName" type="text" placeholder="Nombre" required>
+              <input class="form-control" id="cotizacionName" type="text" placeholder="Nombre">
             </div>
             <div class="mb-3 col-12">
               <label for="cotizacionMail" class="form-label visually-hidden">Correo</label>
-              <input class="form-control" id="cotizacionMail" type="email" placeholder="Correo electrónico" required>
+              <input class="form-control" id="cotizacionMail" type="email" placeholder="Correo electrónico">
             </div>
             <div class="mb-3 col-6">
               <label for="cotizacionVehicle" class="form-label visually-hidden">Vehiculo</label>
-              <select class="form-select" id="cotizacionVehicle" aria-label="Vehículo" required>
+              <select class="form-select" id="cotizacionVehicle" aria-label="Vehículo">
                 <option selected disabled value="">Seleccione un vehículo</option>
                 <option value="bicicleta">Bicicleta</option>
                 <option value="monopatín">Monopatín</option>
@@ -109,7 +109,7 @@
             </div>
             <div class="mb-3 col-6">
               <label for="cotizacionVehicleYear" class="form-label visually-hidden">Año del vehículo</label>
-              <input class="form-control" id="cotizacionVehicleYear" type="text" placeholder="Año del vehículo" required>
+              <input class="form-control" id="cotizacionVehicleYear" type="number" min="1990" step="1" max="2022" placeholder="Año del vehículo">
             </div>
             <button class="btn btn-primary btn-lg" id="cotizadorButton" type="submit">Cotizar</button>
           </form>
@@ -136,6 +136,7 @@
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
   <script src="main.js"></script>
 </body>
 

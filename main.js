@@ -60,6 +60,45 @@ const getClientData = (inputs) => {
   return msg;
 };
 
+const sendEmail = async () => {
+
+  const clientData = JSON.parse(localStorage.getItem('informacionCliente'));
+  clientData['cotizacionPrecio'] = Number(localStorage.getItem('precioCotizacion'));
+  const EMAILJS_KEY = '7QxeKxJ4CF4UpwsHP';
+
+  const reqData = {
+    service_id: 'contact_service',
+    template_id: 'contact_form',
+    user_id: EMAILJS_KEY,
+    template_params: clientData,
+  };
+
+  const reqConfig = {
+    method: 'POST',
+    body: JSON.stringify(reqData),
+    headers: {
+      'Content-type': 'application/json',
+    },
+  };
+
+  const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', reqConfig);
+  if (response.ok) {
+    Swal.fire({
+      title: 'Cotización exitosa',
+      text: 'Se ha enviado a tu correo electrónico los datos de la cotización.',
+      icon: 'success',
+      confirmButtonText: 'Aceptar'
+    });
+  } else {
+    Swal.fire({
+      title: 'Error en la cotización',
+      text: 'Tu cotización no pudo ser procesada. Intentalo nuevamente más tarde.',
+      icon: 'error',
+      confirmButtonText: 'Aceptar'
+    });
+  }
+};
+
 const bike = new Vehicle('bicicleta', 500);
 const scooter = new Vehicle('monopatín', 1000);
 let formValidated = false;
@@ -126,6 +165,7 @@ cotizadorForm.addEventListener('submit', (e) => {
     const msg = getClientData(inputArray);
     const cotizacion = document.getElementById('cotizacion');
     cotizacion.innerHTML = msg;
+    sendEmail();
   }
   formValidated = false;
 });

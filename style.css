@@ -39,9 +39,51 @@ footer {
   margin: 0;
 }
 
-#cotizador {
-  margin-top: 5rem;
-  margin-bottom: 5rem;
+#cotizador,
+#inicio,
+#faq {
+  margin: 2.5rem auto;
+  padding: 2.5rem 0;
+}
+
+.banner {
+  text-align: center;
+  color: #5171ff;
+}
+
+.hero {
+  font-family: "Montserrat-Bold", sans-serif;
+  font-size: 2rem;
+}
+
+.heroDesc {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5rem;
+}
+
+#info .col {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  font-family: "Montserrat", sans-serif;
+}
+
+#info .col p {
+  font-size: 1rem;
+  color: #5171ff;
+  text-align: center;
+}
+
+#info .col a {
+  color: #d74535;
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  #info .col img {
+    width: 75%;
+    height: auto;
+  }
 }
 
 @media screen and (max-width: 768px) {

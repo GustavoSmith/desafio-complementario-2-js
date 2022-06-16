@@ -47,6 +47,17 @@ footer {
   padding: 2.5rem 0;
 }
 
+#cotizacion {
+  display: none;
+  margin-top: 1rem;
+  border: 0.15rem outset #1848a0;
+}
+
+#cotizacion p {
+  margin: 0;
+  padding: 0;
+}
+
 #cotizadorForm {
   padding: 2rem;
 }
@@ -92,7 +103,8 @@ footer {
   padding: 1rem 0;
 }
 
-#info .col:hover {
+#info .col:hover,
+#cotizacion:hover {
   transform: scale(1.15);
   transition: 0.5s;
 }

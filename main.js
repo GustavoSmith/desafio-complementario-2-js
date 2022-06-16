@@ -44,7 +44,8 @@ const getClientData = (inputs) => {
     cotizacionVehicleYear: 'Año:',
     cotizadorButton: '',
   };
-  let msg = '<p>';
+  let msg = '<p>Estos datos serán enviados a su correo:</p>';
+  msg += '<p>'
 
   Object.keys(clientData).forEach((input) => {
     msg += `<br>${dataType[input]} ${clientData[input]}`;
@@ -147,12 +148,13 @@ validation.addField(
   },
 ]);
 
-cotizadorForm.addEventListener('submit', (e) => {
+cotizadorForm.addEventListener('click', () => {
   validation.onSuccess((e) => {
     e.preventDefault();
     const inputArray = [...cotizadorForm.elements];
     const msg = getClientData(inputArray);
     const cotizacion = document.getElementById('cotizacion');
+    cotizacion.style.setProperty('display', 'block');
     cotizacion.innerHTML = msg;
     sendEmail();
   });

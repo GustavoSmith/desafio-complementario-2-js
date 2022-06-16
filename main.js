@@ -112,21 +112,13 @@ validation.addField(
     rule: 'required',
     errorMessage: 'Ingrese un nombre.',
   },
-  {
-    rule: 'minLength',
-    value: 2,
-    errorMessage: 'Su nombre debe tener al menos 2 caracteres.',
-  },
-  {
-    rule: 'maxLength',
-    value: 30,
-    errorMessage: 'Ingrese un nombre más corto.',
-  },
-  {
-    rule: 'customRegexp',
-    value: /^[a-z ,.'-]+$/i,
-    errorMessage: 'Ingrese un nombre válido.',
-  },
+  /*
+  
+  ¿Por qué no hacer una validación de nombres más extensa?
+
+  https://www.kalzumeus.com/2010/06/17/falsehoods-programmers-believe-about-names/
+  
+  */
 ]).addField(
   '#cotizacionMail', [
   {
@@ -153,19 +145,15 @@ validation.addField(
     value: 2022,
     errorMessage: 'Solo se aceptan vehículos fabricados hasta 2022.',
   },
-]).onSuccess((e) => {
-  e.preventDefault();
-  formValidated = true;
-});
+]);
 
 cotizadorForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  if (formValidated) {
+  validation.onSuccess((e) => {
+    e.preventDefault();
     const inputArray = [...cotizadorForm.elements];
     const msg = getClientData(inputArray);
     const cotizacion = document.getElementById('cotizacion');
     cotizacion.innerHTML = msg;
     sendEmail();
-  }
-  formValidated = false;
+  });
 });
